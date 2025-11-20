@@ -6,26 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Hemanth Reddy Gurappagaru - Software Engineer specializing in AWS, Backend Systems, and GenAI">
-    <title>Hemanth Reddy Gurappagaru | Software Engineer</title>
+    <title>Hemanth Reddy Gurappagaru | SDE @ Amazon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">HR<span class="accent">.</span></a>
+            <a href="#" class="logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">HR</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#home" class="nav-link magnetic-element">Home</a></li>
+                <li><a href="#about" class="nav-link magnetic-element">About</a></li>
+                <li><a href="#experience" class="nav-link magnetic-element">Experience</a></li>
+                <li><a href="#skills" class="nav-link magnetic-element">Skills</a></li>
+                <li><a href="#contact" class="nav-link magnetic-element">Contact</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle">
                 <span></span>
@@ -35,139 +43,203 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Matrix Effect -->
     <section id="home" class="hero">
-        <div class="hero-bg"></div>
+        <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+        <div class="mesh-gradient"></div>
         <div class="container hero-container">
             <div class="hero-content">
-                <div class="hero-tag">Software Development Engineer</div>
-                <h1 class="hero-title">
-                    Hi, I'm <span class="gradient-text">Hemanth Reddy</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Building scalable backend systems and AI-powered solutions on AWS.
-                    Expert in microservices, data pipelines, and GenAI integration.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">24B+</span>
-                        <span class="stat-label">Records Processed</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">99.9%</span>
-                        <span class="stat-label">System Uptime</span>
+                <div class="glitch-wrapper">
+                    <div class="glitch-tag" data-text="Software Development Engineer @ Amazon">
+                        Software Development Engineer @ Amazon
                     </div>
                 </div>
+                <h1 class="hero-title">
+                    <span class="typing-text" id="typingText"></span>
+                    <span class="cursor-blink">_</span>
+                </h1>
+                <p class="hero-subtitle holographic-text">
+                    Building scalable AI-powered systems that process 24 Billion+ records on AWS
+                </p>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#experience" class="btn btn-secondary">View Work</a>
+                    <a href="#contact" class="btn btn-primary magnetic-element">
+                        <span class="btn-text">Let's Connect</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                    <a href="#experience" class="btn btn-secondary magnetic-element">
+                        <span class="btn-text">View Work</span>
+                        <span class="btn-icon">↓</span>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
+    </section>
+
+    <!-- Bento Grid Stats & About -->
+    <section id="about" class="bento-section">
+        <div class="container">
+            <div class="bento-grid">
+                <!-- Large stat card -->
+                <div class="bento-card bento-large card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="terminal-line"><span class="prompt">$</span> whoami</p>
+                            <p class="terminal-output">Hemanth Reddy Gurappagaru</p>
+                            <p class="terminal-line"><span class="prompt">$</span> cat role.txt</p>
+                            <p class="terminal-output">Software Development Engineer @ Amazon</p>
+                            <p class="terminal-line"><span class="prompt">$</span> ls skills/</p>
+                            <p class="terminal-output">AWS • GenAI • Python • TypeScript • System Design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat cards -->
+                <div class="bento-card bento-stat card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="stat-content">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-number gradient-text">24B+</div>
+                        <div class="stat-label">Records Processed</div>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-stat card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="stat-content">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-number gradient-text">99.9%</div>
+                        <div class="stat-label">System Uptime</div>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-stat card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="stat-content">
+                        <div class="stat-icon">💡</div>
+                        <div class="stat-number gradient-text">3+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+
+                <!-- Education card -->
+                <div class="bento-card bento-medium card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <h3 class="card-title">🎓 Education</h3>
+                    <div class="edu-content">
+                        <p class="edu-degree">M.S. in Computational Science</p>
+                        <p class="edu-school">Indiana University Bloomington</p>
+                        <p class="edu-gpa">GPA: <span class="gradient-text">3.9/4.0</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
+            <h2 class="section-title">
+                <span class="title-bracket">&lt;</span>
+                Professional Journey
+                <span class="title-bracket">/&gt;</span>
+            </h2>
+
+            <div class="experience-cards">
                 <!-- Amazon -->
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <h3>Software Development Engineer</h3>
-                                <p class="company">Amazon</p>
-                            </div>
-                            <div class="timeline-meta">
-                                <span class="location">Seattle, WA</span>
-                                <span class="duration">June 2024 – Present</span>
-                            </div>
+                <div class="exp-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="exp-header">
+                        <div class="exp-company-logo">
+                            <div class="amazon-icon">⬢</div>
                         </div>
-
-                        <div class="project-group">
-                            <h4 class="project-title">PS Migration Platform (PeopleSoft → GenAI-Ready System)</h4>
-                            <ul class="achievements">
-                                <li>Architected Python + Java pipeline orchestrated through AWS Lambda and Glue,
-                                    sourcing 24 Billion records from S3</li>
-                                <li>Integrated Amazon Bedrock (Kendra + Titan) via custom TypeScript CLI for semantic
-                                    comparison between datasets</li>
-                                <li>Reduced testing cycle time from 8 hours → 1 hour per run and cut full-facet
-                                    validation effort from 40 → 16 hours</li>
-                                <li>Mentored 2 new hires and drove adoption by 25+ engineers across production-critical
-                                    data transformation streams</li>
-                            </ul>
+                        <div class="exp-title-group">
+                            <h3 class="exp-title">Software Development Engineer</h3>
+                            <p class="exp-company gradient-text">Amazon</p>
                         </div>
+                        <div class="exp-meta">
+                            <span class="exp-location">📍 Seattle, WA</span>
+                            <span class="exp-duration">June 2024 – Present</span>
+                        </div>
+                    </div>
 
-                        <div class="project-group">
-                            <h4 class="project-title">Document Processing System (TRACCK)</h4>
-                            <ul class="achievements">
-                                <li>Architected distributed microservices handling 2M+ documents/day via Lambda, SQS,
-                                    and S3</li>
-                                <li>Achieved 99.9% uptime and &lt;3s latency with self-healing alerts and retry queues
+                    <div class="exp-projects">
+                        <div class="project-item">
+                            <h4 class="project-name">
+                                <span class="project-icon">🤖</span>
+                                PS Migration Platform - GenAI Validation Framework
+                            </h4>
+                            <ul class="project-highlights">
+                                <li>Architected Python + Java pipeline processing <strong>24 Billion records</strong>
+                                    via AWS Lambda & Glue</li>
+                                <li>Integrated <strong>Amazon Bedrock</strong> (Kendra + Titan) for AI-assisted
+                                    validation</li>
+                                <li>Reduced testing time: <span class="highlight-metric">8h → 1h</span> per run</li>
+                                <li>Mentored <strong>2 engineers</strong> • Adopted by <strong>25+ team members</strong>
                                 </li>
-                                <li>Automated CI/CD through CodePipeline, CloudFormation, and Dockerized ECS tasks,
-                                    reducing deployment time by 40%</li>
-                                <li>Added integration tests with 95% pytest coverage and centralized logging via
-                                    OpenTelemetry + Kibana</li>
                             </ul>
                         </div>
 
-                        <div class="project-group">
-                            <h4 class="project-title">Pipeline Infrastructure Platform (Maestro)</h4>
-                            <ul class="achievements">
-                                <li>Created modular infrastructure templates (CloudFormation + Terraform) cutting
-                                    service bootstrapping from days to hours</li>
-                                <li>Developed real-time monitoring dashboard with Grafana/Prometheus for 50% faster
-                                    incident resolution</li>
-                                <li>Implemented role-based access controls (IAM + KMS) for secure cross-service
-                                    deployments</li>
+                        <div class="project-item">
+                            <h4 class="project-name">
+                                <span class="project-icon">📄</span>
+                                TRACCK Document Processing System
+                            </h4>
+                            <ul class="project-highlights">
+                                <li>Built microservices handling <strong>2M+ docs/day</strong> with <span
+                                        class="highlight-metric">99.9% uptime</span></li>
+                                <li>Deployed via Lambda, SQS, S3 with <strong>&lt;3s latency</strong></li>
+                                <li>Automated CI/CD cutting deployment time by <span class="highlight-metric">40%</span>
+                                </li>
+                                <li>Achieved <strong>95% test coverage</strong> with pytest</li>
                             </ul>
                         </div>
 
-                        <div class="project-group innovation">
-                            <h4 class="project-title">Innovation Project – TaskOptimize</h4>
-                            <ul class="achievements">
-                                <li>Built and deployed taskoptimize.netlify.app using Next.js + Convex + LangChain</li>
-                                <li>Integrated LLM-based task prioritization and contextual summaries</li>
-                                <li>Adopted by 8 teammates, improving task-tracking efficiency by 30%</li>
+                        <div class="project-item">
+                            <h4 class="project-name">
+                                <span class="project-icon">⚙️</span>
+                                Maestro Infrastructure Platform
+                            </h4>
+                            <ul class="project-highlights">
+                                <li>Created CloudFormation/Terraform templates reducing setup: <span
+                                        class="highlight-metric">days → hours</span></li>
+                                <li>Built Grafana/Prometheus dashboards for <span class="highlight-metric">50%
+                                        faster</span> incident resolution</li>
+                                <li>Implemented IAM + KMS security for PII isolation</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- VEL Electronics -->
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <h3>Software Engineer</h3>
-                                <p class="company">VEL Electronics LLC.</p>
-                            </div>
-                            <div class="timeline-meta">
-                                <span class="location">Remote</span>
-                                <span class="duration">May 2020 – July 2022</span>
-                            </div>
+                <div class="exp-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="exp-header">
+                        <div class="exp-company-logo">
+                            <div class="vel-icon">◆</div>
                         </div>
-                        <ul class="achievements">
-                            <li>Automated data extraction and preprocessing using Python, R, Pandas, NumPy, and SciKit
-                                Learn</li>
-                            <li>Achieved 55% improvement in operational efficiency through intelligent data pipelines
-                            </li>
-                            <li>Engineered predictive analytics solution using TensorFlow and PyTorch</li>
-                            <li>Increased sales forecast accuracy by 15%, directly informing strategic decision-making
-                            </li>
-                        </ul>
+                        <div class="exp-title-group">
+                            <h3 class="exp-title">Software Engineer</h3>
+                            <p class="exp-company gradient-text">VEL Electronics LLC</p>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-location">📍 Remote</span>
+                            <span class="exp-duration">May 2020 – July 2022</span>
+                        </div>
                     </div>
+
+                    <ul class="project-highlights">
+                        <li>Automated data pipelines with Python, Pandas, NumPy → <span class="highlight-metric">55%
+                                efficiency gain</span></li>
+                        <li>Built ML forecasting models (TensorFlow, PyTorch) → <span class="highlight-metric">15%
+                                accuracy improvement</span></li>
+                        <li>Designed predictive analytics solutions driving strategic business decisions</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -176,134 +248,109 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-icon">💻</div>
-                    <h3>Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">NoSQL</span>
+            <h2 class="section-title">
+                <span class="title-bracket">&lt;</span>
+                Tech Stack
+                <span class="title-bracket">/&gt;</span>
+            </h2>
+
+            <div class="skills-bento">
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">💻</span>
+                        <h3>Languages</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-pill">TypeScript</span>
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">Java</span>
+                        <span class="skill-pill">JavaScript</span>
+                        <span class="skill-pill">C++</span>
+                        <span class="skill-pill">SQL</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">⚡</div>
-                    <h3>Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Spring Boot</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">Next.js</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">LangChain</span>
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">☁️</span>
+                        <h3>AWS Cloud</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-pill featured">Lambda</span>
+                        <span class="skill-pill featured">Glue</span>
+                        <span class="skill-pill featured">Bedrock</span>
+                        <span class="skill-pill">S3</span>
+                        <span class="skill-pill">ECS/EKS</span>
+                        <span class="skill-pill">CloudFormation</span>
+                        <span class="skill-pill">Athena</span>
+                        <span class="skill-pill">Kendra</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">☁️</div>
-                    <h3>Cloud & Infrastructure</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS Lambda</span>
-                        <span class="skill-tag">AWS Glue</span>
-                        <span class="skill-tag">ECS/EKS</span>
-                        <span class="skill-tag">S3</span>
-                        <span class="skill-tag">Bedrock</span>
-                        <span class="skill-tag">CloudFormation</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">⚡</span>
+                        <h3>Frameworks</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-pill">Spring Boot</span>
+                        <span class="skill-pill">Flask</span>
+                        <span class="skill-pill">Django</span>
+                        <span class="skill-pill">Next.js</span>
+                        <span class="skill-pill">React</span>
+                        <span class="skill-pill">Node.js</span>
+                        <span class="skill-pill featured">LangChain</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">🔧</div>
-                    <h3>DevOps & Monitoring</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">Jenkins</span>
-                        <span class="skill-tag">Prometheus</span>
-                        <span class="skill-tag">Grafana</span>
-                        <span class="skill-tag">Kibana</span>
-                        <span class="skill-tag">OpenTelemetry</span>
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">🔧</span>
+                        <h3>DevOps</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-pill">Docker</span>
+                        <span class="skill-pill">Kubernetes</span>
+                        <span class="skill-pill">Terraform</span>
+                        <span class="skill-pill">GitHub Actions</span>
+                        <span class="skill-pill">Prometheus</span>
+                        <span class="skill-pill">Grafana</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">🔒</div>
-                    <h3>Security & Testing</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">IAM</span>
-                        <span class="skill-tag">KMS</span>
-                        <span class="skill-tag">OAuth</span>
-                        <span class="skill-tag">JWT</span>
-                        <span class="skill-tag">pytest</span>
-                        <span class="skill-tag">JUnit</span>
-                        <span class="skill-tag">Postman</span>
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">🗄️</span>
+                        <h3>Data & ML</h3>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-pill">PostgreSQL</span>
+                        <span class="skill-pill">MongoDB</span>
+                        <span class="skill-pill">TensorFlow</span>
+                        <span class="skill-pill">PyTorch</span>
+                        <span class="skill-pill">Pandas</span>
+                        <span class="skill-pill">NumPy</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">🤝</div>
-                    <h3>Collaboration</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Jira</span>
-                        <span class="skill-tag">Confluence</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Agile/Scrum</span>
-                        <span class="skill-tag">Slack</span>
+                <div class="skill-card card-3d" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-header">
+                        <span class="skill-icon">🔒</span>
+                        <h3>Security & Testing</h3>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education & Projects -->
-    <section id="projects" class="education-projects">
-        <div class="container">
-            <div class="dual-section">
-                <div class="education-card">
-                    <h2 class="section-title">Education</h2>
-                    <div class="edu-content">
-                        <h3>Master of Science in Computational Science - Data Science</h3>
-                        <p class="institution">Indiana University Bloomington</p>
-                        <div class="edu-meta">
-                            <span>August 2022 – May 2024</span>
-                            <span class="gpa">GPA: 3.9/4.0</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlights-card">
-                    <h2 class="section-title">Key Achievements</h2>
-                    <div class="highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">🚀</div>
-                            <div class="highlight-content">
-                                <h4>AI-Assisted Validation Framework</h4>
-                                <p>Replaced manual testing, saving 24 hours per cycle</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">📊</div>
-                            <div class="highlight-content">
-                                <h4>24M+ Records Processed</h4>
-                                <p>Built scalable data pipelines on AWS</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">⚡</div>
-                            <div class="highlight-content">
-                                <h4>99.9% Uptime</h4>
-                                <p>Designed highly available microservices</p>
-                            </div>
-                        </div>
+                    <div class="skill-items">
+                        <span class="skill-pill">IAM</span>
+                        <span class="skill-pill">KMS</span>
+                        <span class="skill-pill">OAuth</span>
+                        <span class="skill-pill">JWT</span>
+                        <span class="skill-pill">pytest</span>
+                        <span class="skill-pill">JUnit</span>
                     </div>
                 </div>
             </div>
@@ -313,30 +360,42 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="contact-subtitle">I'm always open to discussing new opportunities, projects, or just tech in
-                general.</p>
-            <div class="contact-methods">
-                <a href="mailto:hemanth.gurappagaru@gmail.com" class="contact-card">
+            <h2 class="section-title">
+                <span class="title-bracket">&lt;</span>
+                Get In Touch
+                <span class="title-bracket">/&gt;</span>
+            </h2>
+            <p class="contact-subtitle">Let's build something amazing together</p>
+
+            <div class="contact-grid">
+                <a href="mailto:hemanth.gurappagaru@gmail.com" class="contact-card card-3d magnetic-element" data-tilt>
+                    <div class="card-glow"></div>
                     <div class="contact-icon">📧</div>
                     <h3>Email</h3>
                     <p>hemanth.gurappagaru@gmail.com</p>
                 </a>
-                <a href="tel:+13322604235" class="contact-card">
+
+                <a href="tel:+13322604235" class="contact-card card-3d magnetic-element" data-tilt>
+                    <div class="card-glow"></div>
                     <div class="contact-icon">📱</div>
                     <h3>Phone</h3>
                     <p>(332) 260-4235</p>
                 </a>
+
                 <a href="https://linkedin.com/in/hreddyg" target="_blank" rel="noopener noreferrer"
-                    class="contact-card">
+                    class="contact-card card-3d magnetic-element" data-tilt>
+                    <div class="card-glow"></div>
                     <div class="contact-icon">💼</div>
                     <h3>LinkedIn</h3>
                     <p>linkedin.com/in/hreddyg</p>
                 </a>
-                <a href="https://github.com/hreddyg" target="_blank" rel="noopener noreferrer" class="contact-card">
+
+                <a href="https://github.com/hemu2k" target="_blank" rel="noopener noreferrer"
+                    class="contact-card card-3d magnetic-element" data-tilt>
+                    <div class="card-glow"></div>
                     <div class="contact-icon">🔗</div>
                     <h3>GitHub</h3>
-                    <p>github.com/hreddyg</p>
+                    <p>github.com/hemu2k</p>
                 </a>
             </div>
         </div>
@@ -345,8 +404,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Hemanth Reddy Gurappagaru. All rights reserved.</p>
-            <p class="footer-tagline">Built with passion and precision.</p>
+            <p class="footer-text">
+                <span class="code-bracket">&lt;</span>
+                Built with passion by Hemanth Reddy
+                <span class="code-bracket">/&gt;</span>
+            </p>
+            <p class="footer-subtext">© 2024 • Crafted with ❤️ and lots of ☕</p>
         </div>
     </footer>
 

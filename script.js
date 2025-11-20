@@ -1,5 +1,161 @@
 // ========================================
-// Navigation & Scroll Effects
+// CUSTOM MAGNETIC CURSOR
+// ========================================
+
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-outline');
+const magneticElements = document.querySelectorAll('.magnetic-element');
+
+let mouseX = 0, mouseY = 0;
+let cursorDotX = 0, cursorDotY = 0;
+let cursorOutlineX = 0, cursorOutlineY = 0;
+
+// Smooth cursor follow
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateCursor() {
+    // Smooth follow with different speeds
+    cursorDotX += (mouseX - cursorDotX) * 0.8;
+    cursorDotY += (mouseY - cursorDotY) * 0.8;
+    cursorOutlineX += (mouseX - cursorOutlineX) * 0.15;
+    cursorOutlineY += (mouseY - cursorOutlineY) * 0.15;
+
+    cursorDot.style.left = cursorDotX + 'px';
+    cursorDot.style.top = cursorDotY + 'px';
+    cursorOutline.style.left = cursorOutlineX + 'px';
+    cursorOutline.style.top = cursorOutlineY + 'px';
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+// Magnetic effect on interactive elements
+magneticElements.forEach(elem => {
+    elem.addEventListener('mouseenter', () => {
+        cursorDot.classList.add('active');
+        cursorOutline.classList.add('active');
+    });
+
+    elem.addEventListener('mouseleave', () => {
+        cursorDot.classList.remove('active');
+        cursorOutline.classList.remove('active');
+    });
+
+    elem.addEventListener('mousemove', (e) => {
+        const rect = elem.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        elem.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+
+    elem.addEventListener('mouseleave', () => {
+        elem.style.transform = 'translate(0, 0)';
+    });
+});
+
+// ========================================
+// MATRIX CODE RAIN EFFECT
+// ========================================
+
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = Array(Math.floor(columns)).fill(1);
+
+function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#667eea';
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(drawMatrix, 50);
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// ========================================
+// TYPING ANIMATION
+// ========================================
+
+const typingText = document.getElementById('typingText');
+const textToType = 'Hemanth Reddy Gurappagaru';
+let charIndex = 0;
+
+function typeWriter() {
+    if (charIndex < textToType.length) {
+        typingText.textContent += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+// Start typing after page load
+window.addEventListener('load', () => {
+    setTimeout(typeWriter, 500);
+});
+
+// ========================================
+// 3D CARD TILT EFFECT
+// ========================================
+
+const cards3D = document.querySelectorAll('.card-3d');
+
+cards3D.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        // Move glow with mouse
+        const glow = card.querySelector('.card-glow');
+        if (glow) {
+            glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(102, 126, 234, 0.3) 0%, transparent 50%)`;
+        }
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    });
+});
+
+// ========================================
+// NAVIGATION
 // ========================================
 
 const navbar = document.getElementById('navbar');
@@ -20,7 +176,6 @@ window.addEventListener('scroll', () => {
 mobileToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 
-    // Animate hamburger menu
     const spans = mobileToggle.querySelectorAll('span');
     if (navMenu.classList.contains('active')) {
         spans[0].style.transform = 'rotate(45deg) translateY(7px)';
@@ -44,79 +199,7 @@ navLinks.forEach(link => {
     });
 });
 
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-
-function highlightNav() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    });
-}
-
-window.addEventListener('scroll', highlightNav);
-
-// ========================================
-// Intersection Observer for Animations
-// ========================================
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe timeline items
-const timelineItems = document.querySelectorAll('.timeline-item');
-timelineItems.forEach((item, index) => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(30px)';
-    item.style.transition = `all 0.6s ease ${index * 0.1}s`;
-    observer.observe(item);
-});
-
-// Observe skill categories
-const skillCategories = document.querySelectorAll('.skill-category');
-skillCategories.forEach((category, index) => {
-    category.style.opacity = '0';
-    category.style.transform = 'translateY(30px)';
-    category.style.transition = `all 0.6s ease ${index * 0.1}s`;
-    observer.observe(category);
-});
-
-// Observe contact cards
-const contactCards = document.querySelectorAll('.contact-card');
-contactCards.forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = `all 0.6s ease ${index * 0.1}s`;
-    observer.observe(card);
-});
-
-// ========================================
-// Smooth Scroll for Internal Links
-// ========================================
-
+// Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -125,7 +208,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            const offsetTop = targetElement.offsetTop - 70;
+            const offsetTop = targetElement.offsetTop - 80;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -135,176 +218,182 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ========================================
-// Dynamic Stat Counter Animation
+// INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
 // ========================================
 
-function animateCounter(element, target, duration = 2000) {
-    const start = 0;
-    const increment = target / (duration / 16);
-    let current = start;
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
 
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            if (typeof target === 'number' && target > 10) {
-                element.textContent = Math.floor(current);
-            } else {
-                element.textContent = current.toFixed(1);
-            }
-        }
-    }, 16);
-}
-
-// Observer for stat numbers
-const statsObserver = new IntersectionObserver((entries) => {
+const fadeInObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const statNumber = entry.target;
-            const text = statNumber.textContent;
-
-            // Parse the target value
-            let targetValue;
-            if (text.includes('B+')) {
-                targetValue = parseFloat(text.replace('B+', ''));
-                animateCounter(statNumber, targetValue, 2000);
-                setTimeout(() => {
-                    statNumber.textContent = targetValue + 'B+';
-                }, 2000);
-            } else if (text.includes('M+')) {
-                targetValue = parseFloat(text.replace('M+', ''));
-                animateCounter(statNumber, targetValue, 2000);
-                setTimeout(() => {
-                    statNumber.textContent = targetValue + 'M+';
-                }, 2000);
-            } else if (text.includes('+')) {
-                targetValue = parseInt(text.replace('+', ''));
-                animateCounter(statNumber, targetValue, 2000);
-                setTimeout(() => {
-                    statNumber.textContent = targetValue + '+';
-                }, 2000);
-            } else if (text.includes('%')) {
-                targetValue = parseFloat(text.replace('%', ''));
-                animateCounter(statNumber, targetValue, 2000);
-                setTimeout(() => {
-                    statNumber.textContent = targetValue + '%';
-                }, 2000);
-            }
-
-            statsObserver.unobserve(entry.target);
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.5 });
+}, observerOptions);
 
-document.querySelectorAll('.stat-number').forEach(stat => {
-    statsObserver.observe(stat);
+// Observe cards
+document.querySelectorAll('.bento-card, .exp-card, .skill-card, .contact-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+    fadeInObserver.observe(card);
 });
 
 // ========================================
-// Particle Background Effect (Optional)
+// BUTTON RIPPLE EFFECT
 // ========================================
 
-function createParticles() {
-    const heroBg = document.querySelector('.hero-bg');
-    const particleCount = 50;
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function (e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
 
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.cssText = `
+        ripple.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
             position: absolute;
-            width: ${Math.random() * 3 + 1}px;
-            height: ${Math.random() * 3 + 1}px;
-            background: rgba(99, 102, 241, ${Math.random() * 0.5 + 0.2});
             border-radius: 50%;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: float ${Math.random() * 10 + 10}s linear infinite;
-            animation-delay: ${Math.random() * 5}s;
+            background: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
         `;
-        heroBg.appendChild(particle);
-    }
-}
 
-// Add float animation via style tag
+        this.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// Add ripple animation via style
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0) translateX(0);
-            opacity: 0;
-        }
-        10% {
-            opacity: 1;
-        }
-        90% {
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px);
+    @keyframes ripple {
+        to {
+            transform: scale(4);
             opacity: 0;
         }
     }
 `;
 document.head.appendChild(style);
 
-// Initialize particles
-createParticles();
-
 // ========================================
-// Mouse Follow Effect for Hero
+// PARALLAX EFFECT ON SCROLL
 // ========================================
 
-const hero = document.querySelector('.hero');
-const heroBg = document.querySelector('.hero-bg');
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const meshGradient = document.querySelector('.mesh-gradient');
 
-hero.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const { offsetWidth, offsetHeight } = hero;
-
-    const xPos = (clientX / offsetWidth - 0.5) * 20;
-    const yPos = (clientY / offsetHeight - 0.5) * 20;
-
-    heroBg.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    if (meshGradient) {
+        meshGradient.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
 });
 
 // ========================================
-// Typing Effect for Hero Title (Optional Enhancement)
+// EASTER EGG - KONAMI CODE
 // ========================================
 
-function initTypingEffect() {
-    const heroTitle = document.querySelector('.hero-title');
-    if (!heroTitle) return;
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
 
-    const originalHTML = heroTitle.innerHTML;
-    const text = heroTitle.textContent;
+document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            activateEasterEgg();
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
 
-    // Comment this out if you don't want the typing effect
-    // heroTitle.textContent = '';
-    // let index = 0;
+function activateEasterEgg() {
+    // Create celebratory effect
+    const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
 
-    // function type() {
-    //     if (index < text.length) {
-    //         heroTitle.textContent += text.charAt(index);
-    //         index++;
-    //         setTimeout(type, 100);
-    //     } else {
-    //         heroTitle.innerHTML = originalHTML;
-    //     }
-    // }
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${Math.random() * 100}vw;
+                top: -10px;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                animation: fall ${3 + Math.random() * 2}s linear forwards;
+            `;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 30);
+    }
 
-    // setTimeout(type, 1000);
+    // Add fall animation
+    const confettiStyle = document.createElement('style');
+    confettiStyle.textContent = `
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(confettiStyle);
+
+    console.log('%c🎉 KONAMI CODE ACTIVATED! 🎉', 'color: #667eea; font-size: 24px; font-weight: bold;');
+    console.log('%cYou found the easter egg! Contact me if you did this on purpose 😄', 'color: #f093fb; font-size: 16px;');
 }
 
-// Uncomment to enable typing effect
-// initTypingEffect();
-
 // ========================================
-// Console Easter Egg
+// CONSOLE EASTER EGG
 // ========================================
 
-console.log('%c👨‍💻 Hello, Developer!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
-console.log('%cInterested in working together? Let\'s connect!', 'color: #8b5cf6; font-size: 14px;');
-console.log('%c📧 hemanth.gurappagaru@gmail.com', 'color: #ec4899; font-size: 12px;');
+console.log('%c👨‍💻 Hello, Developer!', 'color: #667eea; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.3)');
+console.log('%c✨ Welcome to my portfolio!', 'color: #764ba2; font-size: 18px;');
+console.log('%c💡 Try the Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A', 'color: #f093fb; font-size: 14px;');
+console.log('%c📧 hemanth.gurappagaru@gmail.com', 'color: #4facfe; font-size: 14px;');
+
+// ========================================
+// PERFORMANCE OPTIMIZATION
+// ========================================
+
+// Reduce motion for users who prefer it
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('*').forEach(el => {
+        el.style.animation = 'none';
+        el.style.transition = 'none';
+    });
+}
+
+// Lazy load images if any
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    imageObserver.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
