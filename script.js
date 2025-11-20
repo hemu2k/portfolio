@@ -167,7 +167,13 @@ const statsObserver = new IntersectionObserver((entries) => {
 
             // Parse the target value
             let targetValue;
-            if (text.includes('M+')) {
+            if (text.includes('B+')) {
+                targetValue = parseFloat(text.replace('B+', ''));
+                animateCounter(statNumber, targetValue, 2000);
+                setTimeout(() => {
+                    statNumber.textContent = targetValue + 'B+';
+                }, 2000);
+            } else if (text.includes('M+')) {
                 targetValue = parseFloat(text.replace('M+', ''));
                 animateCounter(statNumber, targetValue, 2000);
                 setTimeout(() => {
